@@ -4,7 +4,7 @@ import sys
 def main():
     # TODO: Uncomment the code below to pass the first stage
     userInput = input("$ ")
-    sys.stdout.write("{userInput}: command not found")
+    sys.stdout.write(f"{userInput}: command not found")
     pass
 
 
