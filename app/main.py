@@ -5,7 +5,7 @@ def main():
     # TODO: Uncomment the code below to pass the first stage
     while True:
         userInput = input("$ ")
-        sys.stdout.write(f"{userInput}: command not found")
+        sys.stdout.write(f"{userInput}: command not found \n")
     pass
 
 
