@@ -6,8 +6,8 @@ def main():
     while True:
         userInput = input("$ ")
         if "echo" in userInput:
-            userInput = userInput.replace("echo", "")
-            sys.stdout.write(f"{userInput}")
+            userInput = userInput.replace("echo ", "")
+            sys.stdout.write(f"{userInput} \n")
 
         
 
