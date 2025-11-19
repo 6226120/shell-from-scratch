@@ -8,7 +8,9 @@ def main():
         if "echo" in userInput:
             userInput = userInput.replace("echo ", "")
             sys.stdout.write(f"{userInput} \n")
-        else: 
+        elif "exit" in userInput:
+            sys.exit()
+        else:
             sys.stdout.write(f"{userInput}: command not found \n")
         
 
