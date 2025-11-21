@@ -6,7 +6,7 @@ def main():
     commandList = {
         "echo": "echo is a shell builtin",
         "exit": "exit is a shell builtin",
-        "type": "type is a shell bultin"
+        "type": "type is a shell builtin"
     }
 
     while True:
