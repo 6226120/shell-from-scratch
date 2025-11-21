@@ -26,7 +26,7 @@ def command_not_found(userInput):
 
 
 def handle_commands(userCommand,arg,commandList,userInput):
-    if is_echo(userCommand,arg):
+    if is_echo(userCommand):
         sys.stdout.write(f"{arg}\n")
     elif is_exit(userCommand):
         sys.exit()
