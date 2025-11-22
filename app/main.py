@@ -12,9 +12,10 @@ def main():
 
     while True:
         userInput = input("$ ")
-        print(userInput.strip())
-        if userInput[0] == "" or userInput[0] == " ":
+        if userInput[0] == "":
             continue
+        if userInput[0] == " ":
+            userInput.split()
         
         userInputTokens = userInput.split()
         userCommand = userInputTokens[0]
