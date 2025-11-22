@@ -45,7 +45,7 @@ def search_for_path(userCommand):
     for paths in separate_directories():
         print_output_to_file(paths)
         file_path= os.path.join(paths,userCommand)
-        if os.access(paths,os.X_OK) and os.path.isfile(file_path):
+        if os.path.isfile(file_path) and os.access(paths,os.X_OK):
             sys.stdout.write(f"{userCommand} is {file_path}\n")
             return 
     
