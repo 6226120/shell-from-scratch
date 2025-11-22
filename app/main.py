@@ -22,9 +22,9 @@ def main():
         
         userInputTokens = userInput.split()
         userCommand = userInputTokens[0]
-        if "invalid" in userInput:
-            print(userCommand)
         argToken = userInputTokens[1:]
+        if "invalid" in userInput:
+            print(argToken)
         arg = ' '.join(argToken)
 
         handle_commands(userCommand,arg,command_list,userInput)
