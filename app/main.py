@@ -22,6 +22,8 @@ def main():
         
         userInputTokens = userInput.split()
         userCommand = userInputTokens[0]
+        if "invalid" in userInput:
+            print(userCommand)
         argToken = userInputTokens[1:]
         arg = ' '.join(argToken)
 
