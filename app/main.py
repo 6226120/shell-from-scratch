@@ -51,13 +51,8 @@ def search_for_path(userCommand):
         file_path= os.path.join(paths,userCommand)
         if os.path.isfile(file_path) and os.access(file_path,os.X_OK):
             sys.stdout.write(f"{userCommand} is {file_path}\n")
-            if "invalid" in userCommand:
-                print('im here for some reason Its coming through')
             return 
-
-    if "invalid" in userCommand:
-         print('im here and for some reason return isnt returning anything')
-    return f"{userCommand} not found\n"
+    return sys.stdout.write(f"{userCommand} not found\n")
         
 
     
