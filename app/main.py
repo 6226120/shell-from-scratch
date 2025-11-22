@@ -1,9 +1,10 @@
 import sys
+import os
 
 
 def main():
 
-    commandList = {
+    command_list = {
         "echo": "echo is a shell builtin",
         "exit": "exit is a shell builtin",
         "type": "type is a shell builtin"
@@ -11,50 +12,60 @@ def main():
 
     while True:
         userInput = input("$ ")
+        if userInput[0] == "" or userInput[0] == " ":
+            continue
         
-        # We want to tokenize the input so we can differentiate the command from the args
         userInputTokens = userInput.split()
         userCommand = userInputTokens[0]
         argToken = userInputTokens[1:]
         arg = ' '.join(argToken)
 
-        handle_commands(userCommand,arg,commandList,userInput)
+        handle_commands(userCommand,arg,command_list,userInput)
     
 
 def command_not_found(userInput):
     sys.stdout.write(f"{userInput}: command not found \n")
 
 
-def handle_commands(userCommand,arg,commandList,userInput):
+def handle_commands(userCommand,arg,command_list,userInput):
     if is_echo(userCommand):
         sys.stdout.write(f"{arg}\n")
     elif is_exit(userCommand):
         sys.exit()
     elif is_type(userCommand):
-        if arg in commandList:
-            sys.stdout.write(f"{commandList[arg]}\n")
+        if arg in command_list:
+            sys.stdout.write(f"{command_list[arg]}\n")
         else:
-            sys.stdout.write(f"{arg}: not found\n")
+            search_for_path(arg)
     else: 
         command_not_found(userInput)
 
 
+def search_for_path(userCommand):
+    for paths in separate_directories():
+        file_path= os.path.join(paths,userCommand)
+        if os.access(paths,os.X_OK) and os.path.isfile(file_path):
+            sys.stdout.write(f"{userCommand} is {file_path}\n")
+            return 
+    
+    return f"{userCommand} not found\n"
+        
+        
+def separate_directories():
+    paths = os.environ['PATH'].split(os.pathsep)
+    return paths
+
+
 def is_echo(userCommand):
-    if userCommand == "echo":
-        return True
-    return False
+    return userCommand == "echo"
         
 
 def is_exit(userCommand):
-    if userCommand == "exit":
-        return True
-    return False
-
+    return userCommand == "exit"
+       
     
 def is_type(userCommand):
-    if userCommand == "type":
-        return True
-    return False
+    return userCommand == "type"
 
 if __name__ == "__main__":
     main()
