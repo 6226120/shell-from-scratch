@@ -53,8 +53,8 @@ def search_for_path(userCommand):
         
 
 def print_output_to_file(value):
-    with open('out.txt','w') as f:
-            f.write(value)  
+    with open("out.txt","a") as f:
+            f.write(f"{value}\n")  
     
 def separate_directories():
     paths = os.environ['PATH'].split(os.pathsep)
