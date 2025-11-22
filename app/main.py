@@ -42,7 +42,7 @@ def handle_commands(userCommand,arg,command_list,userInput):
 
 
 def search_for_path(userCommand):
-    for paths in separate_directories(userCommand):
+    for paths in separate_directories():
         file_path= os.path.join(paths,userCommand)
         if os.path.isfile(file_path) and os.access(file_path,os.X_OK):
             sys.stdout.write(f"{userCommand} is {file_path}\n")
@@ -51,14 +51,9 @@ def search_for_path(userCommand):
     return f"{userCommand} not found\n"
         
 
-def print_output_to_file(value):
-    with open("out.txt","a") as f:
-            f.write(f"{value}\n")  
     
-def separate_directories(userCommand):
+def separate_directories():
     paths = os.environ['PATH'].split(os.pathsep)
-    if userCommand == 'my_exe':
-            print(paths)
     return paths
 
 
