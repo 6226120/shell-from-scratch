@@ -12,6 +12,8 @@ def main():
 
     while True:
         userInput = input("$ ")
+        if "invalid" in userInput:
+            print(userInput)
         if userInput[0] == "":
             continue
         if userInput[0] == " ":
