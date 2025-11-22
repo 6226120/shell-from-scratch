@@ -44,7 +44,7 @@ def handle_commands(userCommand,arg,command_list,userInput):
 def search_for_path(userCommand):
     for paths in separate_directories(userCommand):
         file_path= os.path.join(paths,userCommand)
-        if os.path.isfile(file_path) and os.access(paths,os.X_OK):
+        if os.path.isfile(file_path) and os.access(file_path,os.X_OK):
             sys.stdout.write(f"{userCommand} is {file_path}\n")
             return 
     
