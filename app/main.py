@@ -12,12 +12,13 @@ def main():
 
     while True:
         userInput = input("$ ")
-        if "invalid" in userInput:
-            print(userInput)
+        # if "invalid" in userInput:
+        #     print(userInput)
+
         if userInput[0] == "":
             continue
         if userInput[0] == " ":
-            userInput.split()
+            userInput.strip()
         
         userInputTokens = userInput.split()
         userCommand = userInputTokens[0]
