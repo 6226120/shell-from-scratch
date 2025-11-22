@@ -12,7 +12,7 @@ def main():
 
     while True:
         userInput = input("$ ")
-        if userInput[0] == "" or userInput[0] == " ":
+        if not userInput.strip() == "":
             continue
         
         userInputTokens = userInput.split()
@@ -47,7 +47,6 @@ def search_for_path(userCommand):
         if os.path.isfile(file_path) and os.access(file_path,os.X_OK):
             sys.stdout.write(f"{userCommand} is {file_path}\n")
             return 
-    
     return f"{userCommand} not found\n"
         
 
