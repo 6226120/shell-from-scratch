@@ -10,6 +10,7 @@ def main():
         "type": "type is a shell builtin"
     }
 
+
     while True:
         userInput = input("$ ")
         # if "invalid" in userInput:
@@ -23,7 +24,8 @@ def main():
         userInputTokens = userInput.split()
         userCommand = userInputTokens[0]
         argToken = userInputTokens[1:]
-        arg = ' '.join(argToken)      
+        arg = ' '.join(argToken)    
+
 
         handle_commands(userCommand,arg,command_list,userInput)
     
@@ -32,31 +34,39 @@ def command_not_found(userInput):
     sys.stdout.write(f"{userInput}: command not found \n")
 
 
-def handle_commands(userCommand,arg,command_list,userInput):
+def handle_commands(userCommand,arg,command_list,userInput,file_path):
     if is_echo(userCommand):
         sys.stdout.write(f"{arg}\n")
     elif is_exit(userCommand):
         sys.exit()
     elif is_type(userCommand):
+        file_path = file_path_for_cmd(arg)
+    
         if arg in command_list:
             sys.stdout.write(f"{command_list[arg]}\n")
         else:
-            search_for_path(arg)
+            if is_executable_file(file_path):
+                sys.stdout.write(f"{arg} is {file_path}\n")
+            else:
+                sys.stdout.write(f"{arg} not found\n")
+
     else: 
         command_not_found(userInput)
 
 
-def search_for_path(userCommand):
-    for paths in separate_directories():
-        file_path= os.path.join(paths,userCommand)
-        if os.path.isfile(file_path) and os.access(file_path,os.X_OK):
-            sys.stdout.write(f"{userCommand} is {file_path}\n")
-            return 
-    return sys.stdout.write(f"{userCommand} not found\n")
+def file_path_for_cmd(userCommand):
+    for path in paths():
+        path_for_file= os.path.join(path,userCommand)
+        if is_executable_file(path_for_file):
+            return path_for_file
+    return None
         
 
-    
-def separate_directories():
+def is_executable_file(file_path_for_cmd):
+    return os.path.isfile(file_path_for_cmd) and os.access(file_path_for_cmd,os.X_OK)
+
+
+def paths():
     paths = os.environ['PATH'].split(os.pathsep)
     return paths
 
