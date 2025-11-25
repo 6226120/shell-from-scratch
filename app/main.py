@@ -1,5 +1,6 @@
 import sys
 import os
+import subprocess
 
 
 def main():
@@ -34,19 +35,19 @@ def command_not_found(userInput):
     sys.stdout.write(f"{userInput}: command not found \n")
 
 
-def handle_commands(userCommand,arg,command_list,userInput,file_path):
+def handle_commands(userCommand,arg,command_list,userInput):
     if is_echo(userCommand):
         sys.stdout.write(f"{arg}\n")
     elif is_exit(userCommand):
         sys.exit()
     elif is_type(userCommand):
-        file_path = file_path_for_cmd(arg)
+        file_path_for_cmd = file_path(arg)
     
         if arg in command_list:
             sys.stdout.write(f"{command_list[arg]}\n")
         else:
-            if is_executable_file(file_path):
-                sys.stdout.write(f"{arg} is {file_path}\n")
+            if is_executable_file(file_path_for_cmd):
+                sys.stdout.write(f"{arg} is {file_path_for_cmd}\n")
             else:
                 sys.stdout.write(f"{arg} not found\n")
 
@@ -54,7 +55,7 @@ def handle_commands(userCommand,arg,command_list,userInput,file_path):
         command_not_found(userInput)
 
 
-def file_path_for_cmd(userCommand):
+def file_path(userCommand):
     for path in paths():
         path_for_file= os.path.join(path,userCommand)
         if is_executable_file(path_for_file):
@@ -62,8 +63,13 @@ def file_path_for_cmd(userCommand):
     return None
         
 
-def is_executable_file(file_path_for_cmd):
-    return os.path.isfile(file_path_for_cmd) and os.access(file_path_for_cmd,os.X_OK)
+def is_executable_file(file_path):
+    return os.path.isfile(file_path) and os.access(file_path,os.X_OK)
+
+def run_program(cmd,userInputTokens):
+    program_file_path = file_path(cmd)
+    if is_executable_file(program_file_path):
+        program = subprocess.run(userInputTokens,capture_output=True, text=True)
 
 
 def paths():
