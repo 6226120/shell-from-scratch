@@ -27,6 +27,7 @@ def main():
             arg = ' '.join(argToken)   
         else:
             userCommand = userInputTokens[0]
+            arg = userCommand
 
         handle_commands(userCommand,arg,command_list,userInputTokens)
     
