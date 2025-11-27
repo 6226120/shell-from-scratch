@@ -21,6 +21,7 @@ def main():
             userInput.strip()
         
         userInputTokens = userInput.split()
+        print(type(userInputTokens))
         if userInputTokens.len() > 1:
             userCommand = userInputTokens[0]
             argToken = userInputTokens[1:]
