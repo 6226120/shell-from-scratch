@@ -14,8 +14,6 @@ def main():
 
     while True:
         userInput = input("$ ")
-        # if "invalid" in userInput:
-        #     print(userInput)
 
         if userInput[0] == "":
             continue
@@ -23,10 +21,13 @@ def main():
             userInput.strip()
         
         userInputTokens = userInput.split()
-        userCommand = userInputTokens[0]
-        argToken = userInputTokens[1:]
-        arg = ' '.join(argToken)    
-
+        if userInputTokens.len() > 1:
+            userCommand = userInputTokens[0]
+            argToken = userInputTokens[1:]
+            arg = ' '.join(argToken)   
+        else:
+            userCommand = userInputTokens[0]
+            arg = ' '.join(argToken) 
 
         handle_commands(userCommand,arg,command_list,userInput)
     
@@ -52,7 +53,7 @@ def handle_commands(userCommand,arg,command_list,userInput):
                 sys.stdout.write(f"{arg} not found\n")
 
     else: 
-        command_not_found(userInput)
+        run_program(userCommand)
 
 
 def file_path(userCommand):
@@ -68,8 +69,11 @@ def is_executable_file(file_path):
 
 def run_program(cmd,userInputTokens):
     program_file_path = file_path(cmd)
-    if is_executable_file(program_file_path):
+    if program_file_path != None:
         program = subprocess.run(userInputTokens,capture_output=True, text=True)
+        sys.stdout.write(program.stdout, program.stderr)
+    else: 
+        command_not_found(cmd)
 
 
 def paths():
