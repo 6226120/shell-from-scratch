@@ -70,7 +70,11 @@ def run_program(cmd,userInputTokens):
     program_file_path = file_path(cmd)
     if program_file_path != None:
         program = subprocess.run(userInputTokens,capture_output=True, text=True)
-        sys.stdout.write(program.stdout, program.stderr)
+        if program.returncode  == 0:
+            sys.stdout.write(program.stdout)
+        else:
+            sys.stdout.write(program.stderr)
+        
     else: 
         command_not_found(cmd)
 
