@@ -29,14 +29,14 @@ def main():
             userCommand = userInputTokens[0]
             arg = ' '.join(argToken) 
 
-        handle_commands(userCommand,arg,command_list,userInput)
+        handle_commands(userCommand,arg,command_list,userInputTokens)
     
 
 def command_not_found(userInput):
     sys.stdout.write(f"{userInput}: command not found \n")
 
 
-def handle_commands(userCommand,arg,command_list,userInput):
+def handle_commands(userCommand,arg,command_list,userInputTokens):
     if is_echo(userCommand):
         sys.stdout.write(f"{arg}\n")
     elif is_exit(userCommand):
@@ -51,9 +51,8 @@ def handle_commands(userCommand,arg,command_list,userInput):
                 sys.stdout.write(f"{arg} is {file_path_for_cmd}\n")
             else:
                 sys.stdout.write(f"{arg} not found\n")
-
     else: 
-        run_program(userCommand)
+        run_program(userCommand,userInputTokens)
 
 
 def file_path(userCommand):
