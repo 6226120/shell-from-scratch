@@ -43,14 +43,12 @@ def handle_commands(userCommand,arg,command_list,userInputTokens):
         sys.exit()
     elif is_type(userCommand):
         file_path_for_cmd = file_path(arg)
-    
         if arg in command_list:
             sys.stdout.write(f"{command_list[arg]}\n")
+        elif file_path_for_cmd == None:
+            sys.stdout.write(f"{arg} not found\n")
         else:
-            if is_executable_file(file_path_for_cmd):
                 sys.stdout.write(f"{arg} is {file_path_for_cmd}\n")
-            else:
-                sys.stdout.write(f"{arg} not found\n")
     else: 
         run_program(userCommand,userInputTokens)
 
