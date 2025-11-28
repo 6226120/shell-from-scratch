@@ -4,11 +4,12 @@ import subprocess
 
 
 def main():
-
+    
     command_list = {
         "echo": "echo is a shell builtin",
         "exit": "exit is a shell builtin",
-        "type": "type is a shell builtin"
+        "type": "type is a shell builtin",
+        "pwd": "pwd is a shell builtin"
     }
 
 
@@ -37,20 +38,24 @@ def command_not_found(userInput):
 
 
 def handle_commands(userCommand,arg,command_list,userInputTokens):
-    if is_echo(userCommand):
+    if userCommand == "echo":
         sys.stdout.write(f"{arg}\n")
-    elif is_exit(userCommand):
+    elif userCommand == "exit":
         sys.exit()
-    elif is_type(userCommand):
+    elif userCommand == "type":
         file_path_for_cmd = file_path(arg)
         if arg in command_list:
             sys.stdout.write(f"{command_list[arg]}\n")
         elif file_path_for_cmd == None:
             sys.stdout.write(f"{arg} not found\n")
         else:
-                sys.stdout.write(f"{arg} is {file_path_for_cmd}\n")
+            sys.stdout.write(f"{arg} is {file_path_for_cmd}\n")
+    elif userCommand == "pwd":
+        sys.stdout.write(os.getcwd())
     else: 
         run_program(userCommand,userInputTokens)
+
+
 
 
 def file_path(userCommand):
@@ -80,18 +85,6 @@ def run_program(cmd,userInputTokens):
 def paths():
     paths = os.environ['PATH'].split(os.pathsep)
     return paths
-
-
-def is_echo(userCommand):
-    return userCommand == "echo"
-        
-
-def is_exit(userCommand):
-    return userCommand == "exit"
-       
-    
-def is_type(userCommand):
-    return userCommand == "type"
 
 if __name__ == "__main__":
     main()
