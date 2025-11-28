@@ -51,7 +51,7 @@ def handle_commands(userCommand,arg,command_list,userInputTokens):
         else:
             sys.stdout.write(f"{arg} is {file_path_for_cmd}\n")
     elif userCommand == "pwd":
-        sys.stdout.write(os.getcwd())
+        sys.stdout.write(f"{os.getcwd()}\n")
     else: 
         run_program(userCommand,userInputTokens)
 
