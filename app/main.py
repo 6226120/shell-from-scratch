@@ -60,7 +60,7 @@ def handle_commands(userCommand,arg,command_list,userInputTokens):
 
 def command_cd(arg):
     if arg == "~":
-            os.path.expanduser("~")
+            os.chdir(os.path.expanduser("~"))
     elif os.path.splitroot(arg)[1] == "" or os.path.splitroot(arg)[1] == '..': 
             print(os.path.splitroot(arg))
     else : 
