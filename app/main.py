@@ -9,7 +9,8 @@ def main():
         "echo": "echo is a shell builtin",
         "exit": "exit is a shell builtin",
         "type": "type is a shell builtin",
-        "pwd": "pwd is a shell builtin"
+        "pwd": "pwd is a shell builtin",
+        "cd": "cd is a shell builtin"
     }
 
 
@@ -52,10 +53,13 @@ def handle_commands(userCommand,arg,command_list,userInputTokens):
             sys.stdout.write(f"{arg} is {file_path_for_cmd}\n")
     elif userCommand == "pwd":
         sys.stdout.write(f"{os.getcwd()}\n")
+    elif userCommand == "cd":
+        try:
+            os.chdir(arg)
+        except OSError:
+            sys.stdout.write(f"cd: {arg}: No such file or directory")
     else: 
         run_program(userCommand,userInputTokens)
-
-
 
 
 def file_path(userCommand):
