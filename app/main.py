@@ -54,7 +54,9 @@ def handle_commands(userCommand,arg,command_list,userInputTokens):
     elif userCommand == "pwd":
         sys.stdout.write(f"{os.getcwd()}\n")
     elif userCommand == "cd":
-        print(split_directory(arg))
+        
+        if os.path.splitroot(arg)[1] == "" or os.path.splitroot(arg)[1] == '..':
+            print(os.path.splitroot(arg))
         try:
             os.chdir(arg)
         except OSError:
