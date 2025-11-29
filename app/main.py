@@ -57,7 +57,7 @@ def handle_commands(userCommand,arg,command_list,userInputTokens):
         try:
             os.chdir(arg)
         except OSError:
-            sys.stdout.write(f"cd: {arg}: No such file or directory")
+            sys.stdout.write(f"cd: {arg}: No such file or directory\n")
     else: 
         run_program(userCommand,userInputTokens)
 
