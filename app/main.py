@@ -54,6 +54,7 @@ def handle_commands(userCommand,arg,command_list,userInputTokens):
     elif userCommand == "pwd":
         sys.stdout.write(f"{os.getcwd()}\n")
     elif userCommand == "cd":
+        print(split_directory(arg))
         try:
             os.chdir(arg)
         except OSError:
@@ -61,6 +62,8 @@ def handle_commands(userCommand,arg,command_list,userInputTokens):
     else: 
         run_program(userCommand,userInputTokens)
 
+def split_directory(arg):
+    return os.path.splitroot(arg)
 
 def file_path(userCommand):
     for path in paths():
