@@ -54,18 +54,20 @@ def handle_commands(userCommand,arg,command_list,userInputTokens):
     elif userCommand == "pwd":
         sys.stdout.write(f"{os.getcwd()}\n")
     elif userCommand == "cd":
-        
-        if os.path.splitroot(arg)[1] == "" or os.path.splitroot(arg)[1] == '..':
+        command_cd(arg)
+    else: 
+        run_program(userCommand,userInputTokens)
+
+def command_cd(arg):
+    if arg == "~":
+            os.path.expanduser("~")
+    elif os.path.splitroot(arg)[1] == "" or os.path.splitroot(arg)[1] == '..': 
             print(os.path.splitroot(arg))
+    else : 
         try:
             os.chdir(arg)
         except OSError:
             sys.stdout.write(f"cd: {arg}: No such file or directory\n")
-    else: 
-        run_program(userCommand,userInputTokens)
-
-def split_directory(arg):
-    return os.path.splitroot(arg)
 
 def file_path(userCommand):
     for path in paths():
