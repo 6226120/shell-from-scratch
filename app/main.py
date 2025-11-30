@@ -65,7 +65,7 @@ def command_cd(arg):
                 os.chdir(arg)
             except OSError:
                 sys.stdout.write(f"cd: {arg}: No such file or directory\n")
-        elif current_or_parent(arg) == type(int):
+        elif type(current_or_parent(arg)) is int:
             for _ in range(current_or_parent(arg)):
                 os.chdir("..")
             sys.stdout.write("Im here parent\n")
