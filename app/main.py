@@ -12,8 +12,6 @@ def main():
         "pwd": "pwd is a shell builtin",
         "cd": "cd is a shell builtin"
     }
-
-
     while True:
         userInput = input("$ ")
 
@@ -65,11 +63,12 @@ def command_cd(arg):
         if current_or_parent(arg) == "current":
             try:
                 os.chdir(arg)
-                sys.stdout.write("Im here current")
             except OSError:
                 sys.stdout.write(f"cd: {arg}: No such file or directory\n")
-        elif current_or_parent(arg) == "parent":
-            sys.stdout.write("Im here parent")
+        elif current_or_parent(arg) == type(int):
+            for _ in range(current_or_parent(arg)):
+                os.chdir("..")
+            sys.stdout.write("Im here parent\n")
             os.chdir("..")
         else: 
             sys.stdout.write(f"cd: {arg}: No such file or directory (shouldn't get here)\n")
@@ -88,10 +87,14 @@ def file_path(userCommand):
         
 def current_or_parent(arg):
     path_split = arg.split("/")
+    number_of_dots = 0
     if path_split[0] == ".":
         return "current"
     elif path_split[0] == "..": 
-        return "parent"
+        for amount in path_split:
+            if amount == "..":
+                number_of_dots += 1
+        return number_of_dots
     else: 
         return None 
 
