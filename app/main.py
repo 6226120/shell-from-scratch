@@ -68,8 +68,6 @@ def command_cd(arg):
         elif type(current_or_parent(arg)) is int:
             for _ in range(current_or_parent(arg)):
                 os.chdir("..")
-            sys.stdout.write("Im here parent\n")
-            os.chdir("..")
         else: 
             sys.stdout.write(f"cd: {arg}: No such file or directory (shouldn't get here)\n")
     else : 
