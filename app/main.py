@@ -65,9 +65,11 @@ def command_cd(arg):
         if current_or_parent(arg) == "current":
             try:
                 os.chdir(arg)
+                sys.stdout.write("Im here current")
             except OSError:
                 sys.stdout.write(f"cd: {arg}: No such file or directory\n")
         elif current_or_parent(arg) == "parent":
+            sys.stdout.write("Im here parent")
             os.chdir("..")
         else: 
             sys.stdout.write(f"cd: {arg}: No such file or directory (shouldn't get here)\n")
