@@ -61,8 +61,16 @@ def handle_commands(userCommand,arg,command_list,userInputTokens):
 def command_cd(arg):
     if arg == "~":
             os.chdir(os.path.expanduser("~"))
-    elif os.path.splitroot(arg)[1] == "" or os.path.splitroot(arg)[1] == '..': 
-            print(os.path.splitroot(arg))
+    elif os.path.splitroot(arg)[1] == "": 
+        if current_or_parent(arg) == "current":
+            try:
+                os.chdir(arg)
+            except OSError:
+                sys.stdout.write(f"cd: {arg}: No such file or directory\n")
+        elif current_or_parent(arg) == "parent":
+            os.chdir("..")
+        else: 
+            sys.stdout.write(f"cd: {arg}: No such file or directory (shouldn't get here)\n")
     else : 
         try:
             os.chdir(arg)
@@ -76,6 +84,15 @@ def file_path(userCommand):
             return path_for_file
     return None
         
+def current_or_parent(arg):
+    path_split = arg.split("/")
+    if path_split[0] == ".":
+        return "current"
+    elif path_split[0] == "..": 
+        return "parent"
+    else: 
+        return None 
+
 
 def is_executable_file(file_path):
     return os.path.isfile(file_path) and os.access(file_path,os.X_OK)
