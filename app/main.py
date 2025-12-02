@@ -1,6 +1,7 @@
 import sys
 import os
 import subprocess
+import re
 
 
 def main():
@@ -14,20 +15,19 @@ def main():
     }
     while True:
         userInput = input("$ ")
+        userInput = userInput.strip()
 
-        if userInput[0] == "":
-            continue
-        if userInput[0] == " ":
-            userInput.strip()
+        userCommand = re.search("^[^\s]+")
+        arg= re.search("\s(.*)")
         
         userInputTokens = userInput.split()
-        if len(userInputTokens) > 1:
-            userCommand = userInputTokens[0]
-            argToken = userInputTokens[1:]
-            arg = ' '.join(argToken)   
-        else:
-            userCommand = userInputTokens[0]
-            arg = userCommand
+        # if len(userInputTokens) > 1:
+        #     userCommand = userInputTokens[0]
+        #     argToken = userInputTokens[1:]
+        #     arg = ' '.join(argToken)   
+        # else:
+        #     userCommand = userInputTokens[0]
+        #     arg = userCommand
 
         handle_commands(userCommand,arg,command_list,userInputTokens)
     
@@ -55,6 +55,10 @@ def handle_commands(userCommand,arg,command_list,userInputTokens):
         command_cd(arg)
     else: 
         run_program(userCommand,userInputTokens)
+
+
+def single_quote(arg):
+    re.findall("(?<=')[^']*(?=')",arg)
 
 def command_cd(arg):
     if arg == "~":
@@ -95,7 +99,6 @@ def current_or_parent(arg):
         return number_of_dots
     else: 
         return None 
-
 
 def is_executable_file(file_path):
     return os.path.isfile(file_path) and os.access(file_path,os.X_OK)
