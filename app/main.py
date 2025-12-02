@@ -57,8 +57,8 @@ def handle_commands(userCommand,arg,command_list,userInputTokens):
         run_program(userCommand,userInputTokens)
 
 
-def single_quote(arg):
-    re.findall("(?<=')[^']*(?=')",arg)
+# def single_quote(arg):
+#     re.findall("(?<=')[^']*(?=')",arg)
 
 def command_cd(arg):
     if arg == "~":
