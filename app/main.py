@@ -17,8 +17,8 @@ def main():
         userInput = input("$ ")
         userInput = userInput.strip()
 
-        userCommand = re.search("^[^\s]+",userInput)
-        arg= re.search("\s(.*)",userInput)
+        userCommand = re.search(r"^[^\s]+",userInput)
+        arg= re.search(r"\s(.*)",userInput)
         
         userInputTokens = userInput.split()
         # if len(userInputTokens) > 1:
