@@ -20,12 +20,13 @@ def main():
         userCommand = re.search(r"^[^\s]+",userInput)
         userCommand = userCommand.group()
 
-        arg= re.search(r"\s(.*)",userInput)
-        arg = arg.group()
+        arg= re.search(r"^\S+\s+(.*)",userInput)
+        arg = arg.group(2)
         print(arg)
-
-        if re.findall("(?<=')[^']*(?=')",arg) != None:
-            arg= re.findall("(?<=')[^']*(?=')",arg)
+         
+        single_quote = re.search("(?<=')[^']*(?=')",arg)
+        if single_quote:
+            arg= single_quote.group()
         
         
         userInputTokens = userInput.split()
