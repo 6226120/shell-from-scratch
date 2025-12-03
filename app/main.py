@@ -19,12 +19,14 @@ def main():
 
         userCommand = re.search(r"^[^\s]+",userInput)
         userCommand = userCommand.group()
+
+        arg= re.search(r"^[^\s]+",userInput)
+        arg = arg.group()
+        
         if re.findall("(?<=')[^']*(?=')",arg) == None:
             arg= re.search(r"\s(.*)",userInput)
             arg = arg.group()
-        else: 
-            arg= re.search(r"^[^\s]+",userInput)
-            arg = arg.group()
+        
         
         userInputTokens = userInput.split()
         # if len(userInputTokens) > 1:
