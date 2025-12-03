@@ -22,6 +22,7 @@ def main():
 
         arg= re.search(r"\s(.*)",userInput)
         arg = arg.group()
+        print(arg)
 
         if re.findall("(?<=')[^']*(?=')",arg) != None:
             arg= re.findall("(?<=')[^']*(?=')",arg)
