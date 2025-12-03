@@ -26,6 +26,7 @@ def main():
          
         single_quote = re.search("(?<=')[^']*(?=')",arg)
         if single_quote:
+            print("i am here")
             arg= single_quote.group()
         
         
