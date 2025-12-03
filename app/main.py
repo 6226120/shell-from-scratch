@@ -21,7 +21,7 @@ def main():
         userCommand = userCommand.group()
 
         arg= re.search(r"^\S+\s+(.*)",userInput)
-        arg = arg.group(2)
+        arg = arg.group(1)
         print(arg)
          
         single_quote = re.search("(?<=')[^']*(?=')",arg)
