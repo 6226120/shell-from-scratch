@@ -20,11 +20,11 @@ def main():
         userCommand = re.search(r"^[^\s]+",userInput)
         userCommand = userCommand.group()
 
-        arg= re.search(r"^[^\s]+",userInput)
+        arg= re.search(r"\s(.*)",userInput)
         arg = arg.group()
-        
-        if re.findall("(?<=')[^']*(?=')",arg) == None:
-            arg= re.search(r"\s(.*)",userInput)
+
+        if re.findall("(?<=')[^']*(?=')",arg) != None:
+            arg= re.findall("(?<=')[^']*(?=')",arg)
             arg = arg.group()
         
         
