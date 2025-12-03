@@ -22,11 +22,9 @@ def main():
 
         arg= re.search(r"^\S+\s+(.*)",userInput)
         arg = arg.group(1)
-        print(arg)
          
         single_quote = re.search("(?<=')[^']*(?=')",arg)
         if single_quote:
-            print("i am here")
             arg= single_quote.group()
         
         
