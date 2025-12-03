@@ -19,10 +19,8 @@ def main():
 
         userCommand = re.search(r"^[^\s]+",userInput)
         userCommand = userCommand.group()
-        print(userCommand)
         arg= re.search(r"\s(.*)",userInput)
         arg = arg.group()
-        print(arg)
         
         userInputTokens = userInput.split()
         # if len(userInputTokens) > 1:
