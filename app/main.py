@@ -24,7 +24,7 @@ def main():
         arg = arg.group()
 
         if re.findall("(?<=')[^']*(?=')",arg) != None:
-            arg= re.findall("(?<=')[^']*(?=')",arg)
+            arg= re.search("(?<=')[^']*(?=')",arg)
             arg = arg.group()
         
         
