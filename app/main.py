@@ -25,7 +25,6 @@ def main():
 
         if re.findall("(?<=')[^']*(?=')",arg) != None:
             arg= re.findall("(?<=')[^']*(?=')",arg)
-            print(arg)
         
         
         userInputTokens = userInput.split()
