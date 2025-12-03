@@ -24,8 +24,8 @@ def main():
         arg = arg.group()
 
         if re.findall("(?<=')[^']*(?=')",arg) != None:
-            arg= re.search("(?<=')[^']*(?=')",arg)
-            arg = arg.group()
+            arg= re.findall("(?<=')[^']*(?=')",arg)
+            print(arg)
         
         
         userInputTokens = userInput.split()
