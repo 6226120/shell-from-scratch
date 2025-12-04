@@ -21,11 +21,11 @@ def main():
         userCommand = userCommand.group()
         userInputTokens = userInput.split()
 
-        argToken = userInputTokens[1:]
-        arg = ' '.join(argToken)   
+        # argToken = userInputTokens[1:]
+        # arg = ' '.join(argToken)   
         
-        # arg= re.search(r"^\S+\s+(.*)",userInput)
-        # arg = arg.group(1)   
+        arg= re.search(r"^\S+\s+(.*)",userInput)
+        arg = arg.group(1)   
 
         single_quote = re.findall("(?<=')[^']*(?=')",arg)
         if len(single_quote) > 1:
