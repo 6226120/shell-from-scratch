@@ -30,6 +30,7 @@ def main():
             print(single_quote)
         else: 
            arg = re.search("(?<=')[^']*(?=')",arg)
+           arg = arg.group()
 
 
         handle_commands(userCommand,arg,command_list,userInputTokens)
