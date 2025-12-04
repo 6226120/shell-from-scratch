@@ -29,7 +29,7 @@ def main():
         if len(single_quote) > 1:
             print(single_quote)
         else: 
-           arg = re.search("(?<=')[^']*(?=')",single_quote)
+           arg = re.search("(?<=')[^']*(?=')",arg)
 
 
         handle_commands(userCommand,arg,command_list,userInputTokens)
