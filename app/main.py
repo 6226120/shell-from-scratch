@@ -21,12 +21,16 @@ def main():
         userCommand = userCommand.group()
         userInputTokens = userInput.split()
 
-        argToken = userInputTokens[1:]
-        arg = ' '.join(argToken)   
 
-        single_quote = re.search("(?<=')[^']*(?=')",arg)
-        if single_quote:
-            arg= single_quote.group()  
+        arg= re.search(r"^\S+\s+(.*)",userInput)
+        arg = arg.group(1)   
+
+        single_quote = re.findall("(?<=')[^']*(?=')",arg)
+        if len(single_quote) > 1:
+            print(single_quote)
+        else: 
+           arg = re.search("(?<=')[^']*(?=')",single_quote)
+
 
         handle_commands(userCommand,arg,command_list,userInputTokens)
     
