@@ -26,9 +26,9 @@ def main():
 
         single_quote = re.findall("(?<=')[^']*(?=')",arg)
         if len(single_quote) > 1:
-            for strings in single_quote:
-                arg += strings
-            print(arg)
+            # for strings in single_quote:
+            #     arg += strings
+            print(single_quote)
         elif single_quote: 
            arg = re.search("(?<=')[^']*(?=')",arg)
            arg = arg.group()
