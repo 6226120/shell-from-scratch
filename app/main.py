@@ -24,7 +24,7 @@ def main():
         arg= re.search(r"^\S+\s+(.*)",userInput)
         arg = arg.group(1)   
 
-        single_quote = re.findall("(?<=')[^']*(?=')",arg)
+        single_quote = re.findall("(?<=')[^']*(?=.)",arg)
         if len(single_quote) > 1:
             arg = ''.join(single_quote)
             # for strings in single_quote:
