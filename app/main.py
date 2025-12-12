@@ -28,6 +28,7 @@ def main():
         if len(single_quote) > 1:
             for strings in single_quote:
                 arg += strings
+            print(arg)
         elif single_quote: 
            arg = re.search("(?<=')[^']*(?=')",arg)
            arg = arg.group()
