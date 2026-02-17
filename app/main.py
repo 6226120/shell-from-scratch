@@ -2,6 +2,7 @@ import sys
 import os
 import subprocess
 import re
+from parser import Parser
 
 
 def main():
@@ -15,30 +16,27 @@ def main():
     }
     while True:
         userInput = input("$ ")
-        userInput = userInput.strip()
+        p = Parser(userInput)
+        userCommand = p.get_Command()
+        userInputTokens = p.get_input_tokens()
+        arg= p.get_argument()
 
-        userCommand = re.search(r"^[^\s]+",userInput)
-        userCommand = userCommand.group()
-        userInputTokens = userInput.split() 
-        
-        arg= re.search(r"^\S+\s+(.*)",userInput)
-        arg = arg.group(1)   
-
-        
-        
         argToken = userInputTokens[1:]
         arg = ' '.join(argToken) 
 
-        handle_commands(userCommand,arg,command_list,userInputTokens)
+        handle_commands(userCommand,arg,command_list,userInputTokens,p)
     
 
 def command_not_found(userInput):
     sys.stdout.write(f"{userInput}: command not found \n")
 
 
-def handle_commands(userCommand,arg,command_list,userInputTokens):
+def handle_commands(userCommand,arg,command_list,userInputTokens,p):
     if userCommand == "echo":
-        sys.stdout.write(f"{arg}\n")
+        if p.has_quote():
+             sys.stdout.write(f"{p.single_quote_parser(arg)}\n")
+        else:
+            sys.stdout.write(f"{arg}\n")
     elif userCommand == "exit":
         sys.exit()
     elif userCommand == "type":
